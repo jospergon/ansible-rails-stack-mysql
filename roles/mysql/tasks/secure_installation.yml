@@ -1,0 +1,22 @@
+---
+  - name: Update mysql root passwd
+    mysql_user: name=root host={{ item }} password={{ mysql_root_passwd }}
+    with_items:
+      - "{{ ansible_hostname }}"
+      - 127.0.0.1
+      - ::1
+      - localhost
+
+  - name: Copy user my.cnf file with root passwd credentials
+    template: src=root.my.cnf.j2 dest=/root/.my.cnf owner=root group=root mode=0600
+
+  - name: Delete anonymous mysql user
+    mysql_user: name="" state=absent
+
+  - name: Remove mysql test database
+    mysql_db: name=test state=absent
+
+  - name: Copy config file my.conf
+    template : src=my.cnf.j2 dest=/etc/mysql/my.cnf owner=root group=root mode=0544
+    notify:
+    - mysql-restart

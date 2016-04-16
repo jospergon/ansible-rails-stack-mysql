@@ -1,0 +1,26 @@
+---
+  - name: Install required packages
+    apt: name={{ item }} state=present
+    with_items:
+      - mysql-client
+      - wget
+
+  - name: Install s3cmd apt key
+    apt_key: url=http://s3tools.org/repo/deb-all/stable/s3tools.key state=present
+
+  - name: Install s3cmd repository
+    get_url: url=http://s3tools.org/repo/deb-all/stable/s3tools.list dest=/etc/apt/sources.list.d/s3tools.list
+
+  - name: Install s3cmd package
+    apt: name=s3cmd state=present
+
+  - name: Add s3cfg config file
+    template: src=s3cfg.j2 dest=/etc/s3cfg owner=root group=root mode=0644
+
+  - name: Add backups script
+    template: src=backup.sh.j2 dest=/opt/backup.sh owner=root group=root mode=0644
+
+  - name: Schedule backups in cron
+    cron: minute=* name="Backup mysql tables" user='ubuntu' job='sudo sh /opt/backup.sh'
+    tags:
+      - cron

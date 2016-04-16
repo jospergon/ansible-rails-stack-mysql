@@ -1,0 +1,9 @@
+---
+
+  - name: Create app database
+    mysql_db: name={{ database_name }} state=present
+
+  - name: Add app mysql user
+    mysql_user: name={{ database_user }} host={{ item }} password={{ database_password }} priv={{ database_name }}.*:ALL state=present
+    with_items:
+      - '%'

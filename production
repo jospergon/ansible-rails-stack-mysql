@@ -1,0 +1,7 @@
+[webservers]
+ec2-54-229-53-13.eu-west-1.compute.amazonaws.com
+
+[dbservers]
+ec2-54-229-53-13.eu-west-1.compute.amazonaws.com
+
+[backgroundjobs]

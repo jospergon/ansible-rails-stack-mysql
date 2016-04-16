@@ -1,0 +1,5 @@
+#!/bin/bash
+
+mysqldump -u {{ database_user }} -p"{{ database_password}}" {{ database_name}} | gzip -v > {{ database_backup_file }}
+
+s3cmd -c /etc/s3cfg put {{ database_backup_file }} s3://{{ s3_bucket }}/{{ database_name}}/

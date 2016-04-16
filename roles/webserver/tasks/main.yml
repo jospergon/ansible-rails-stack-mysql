@@ -1,0 +1,4 @@
+---
+  - include: deploy_user.yml
+  - include: nginx.yml
+  - include: puma.yml

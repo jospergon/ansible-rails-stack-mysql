@@ -1,0 +1,11 @@
+---
+  - hosts: webservers
+    remote_user: ubuntu
+    sudo: yes
+    roles:
+      - apt
+      - webserver
+      - role: rvm_io.rvm1-ruby
+        rvm1_rubies: 'ruby-2.2.0'
+        tags:
+          - ruby

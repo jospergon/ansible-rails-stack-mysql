@@ -1,0 +1,9 @@
+---
+  - name: Add puma conf to init
+    template: src=init-puma.conf.j2 dest=/etc/init/puma.conf
+
+  - name: Add puma manager to init
+    template: src=init-puma-manager.conf.j2 dest=/etc/init/puma-manager.conf
+
+  - name: Add puma conf to etc directory
+    template: src=puma.conf.j2 dest=/etc/puma.conf

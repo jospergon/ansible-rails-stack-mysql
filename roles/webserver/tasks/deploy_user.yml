@@ -1,0 +1,5 @@
+---
+  - name: Add user to deploy web app
+    user: name=deploy shell=/bin/bash
+    tags:
+      - web

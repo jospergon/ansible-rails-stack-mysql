@@ -1,0 +1,5 @@
+---
+  - include: installation.yml
+  - include: secure_installation.yml
+  - include: database.yml
+  - include: backups.yml

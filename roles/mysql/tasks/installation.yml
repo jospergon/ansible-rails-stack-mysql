@@ -1,0 +1,6 @@
+---
+  - name: Install mysql server packages
+    apt: name={{ item }} state=present
+    with_items:
+      - mysql-server
+      - python-mysqldb
